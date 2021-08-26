@@ -177,6 +177,12 @@ td {
   border-color: #33c3f0 !important;
 }
 
+#playersList tr td:nth-of-type(5) {
+  overflow: scroll;
+  word-wrap: break-word;
+
+}
+
 #conditions-search {
   background-image: url("http://assets.stickpng.com/thumbs/585e4ae1cb11b227491c3393.png");
   background-size: 25px;

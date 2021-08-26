@@ -1,396 +1,410 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Basic D&D Tool</title>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css'>
-<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'><link rel="stylesheet" href="./style.css">
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'>
+  <link rel="stylesheet" href="./style.css">
+  <link rel="shortcut icon" type="image/jpg" href="https://muqtadaa.github.io/images/minimal_logo_no_text.png" />
 
 </head>
+
 <body>
-<!-- partial:index.partial.html -->
-<div class="wrapper">
+  <!-- partial:index.partial.html -->
+  <div class="wrapper">
 
-  <div class="container">
+    <div class="container">
 
-    <div class="row title">
+      <div class="row title">
 
-      <h1>Basic D&D Tool</h1>
-      <h5><a href="https://muqtadaa.github.io/">by Muqtadaa Miandara</a></h5>
+        <h1>Basic D&D Tool</h1>
+        <h5><a href="https://muqtadaa.github.io/">by Muqtadaa Miandara</a></h5>
+
+      </div>
+
+    </div>
+
+    <div class="container initTable">
+
+      <table class="u-full-width" id="initiativeTable">
+
+        <thead class="player">
+
+          <tr>
+
+            <th class="header unselected" id="block-one" colspan="3" onclick="showPlayers()">
+
+              <h4>Players and Initiative</h4>
+
+            </th>
+
+            <th class="header" id="block-two" colspan="3" onclick="showConditions()">
+
+              <h4>Conditions</h4>
+
+            </th>
+
+          </tr>
+
+        </thead>
+
+        <thead id="player-header">
+
+          <tr>
+
+            <th>Initiative:</th>
+            <th>Name:</th>
+            <th>Hit Points:</th>
+            <th>Armor Class:</th>
+            <th>Notes:</th>
+            <th>
+              <button class="save" id="save-button" onclick="savePlayers()">
+                <i class="fas fa-save"></i>
+              </button>
+              <label id="upload-label" for="file-upload" class="button">
+                <i class="fas fa-upload"></i>
+                <input id="file-upload" type="file" value="" placeholder="" enctype="text/plain;charset=utf-8"
+                  onchange="uploadPlayers()"></input>
+              </label>
+            </th>
+
+          </tr>
+
+        </thead>
+
+        <thead id="conditions-header" class="hide">
+
+          <tr>
+
+            <th colspan="2">Condition:</th>
+
+            <th colspan="2">Effects:</th>
+
+            <th colspan="2">
+
+              <input type="search" id="conditions-search" placeholder="Search Conditions" class="u-full-width"
+                onkeyup="search()"></input>
+
+            </th>
+
+          </tr>
+
+        </thead>
+
+        <tbody id="playersList">
+
+          <tr>
+
+            <td contenteditable="true" oninput="sortTable()">00</td>
+
+            <td contenteditable="true">Player Playerson</td>
+
+            <td contenteditable="true">000</td>
+
+            <td contenteditable="true">00</td>
+
+            <td contenteditable="true">Add notes here</td>
+
+            <td class="delete-button">
+
+              <button class="delete" onclick="deletePlayer(this);">
+
+                <i class="fas fa-trash"></i>
+
+              </button>
+
+            </td>
+
+          </tr>
+
+        </tbody>
+
+        <tbody id="conditions-table" class="hide">
+
+          <tr id="blinded">
+
+            <td colspan="2">Blinded</td>
+
+            <td colspan="4">
+              <ul>
+                <li>Automatic failure on sight-based checks</li>
+                <li>You have disadvantage on attack rolls</li>
+                <li>Attacks against you have advantage</li>
+              </ul>
+            </td>
+
+          </tr>
+
+          <tr id="charmed">
+
+            <td colspan="2">Charmed</td>
+
+            <td colspan="4">
+              <ul>
+                <li>You cannot target the creature that charmed you with attacks or harmful effects</li>
+                <li>The creature that charmed you has advantage on social interactions with you (Charisma based checks)
+                </li>
+              </ul>
+            </td>
+
+          </tr>
+
+          <tr id="frightened">
+
+            <td colspan="2">Frightened</td>
+
+            <td colspan="4">
+              <ul>
+                <li>You cannot willingly move closer to the source of your fear</li>
+                <li>You have disadvantage on attack rolls while you can see the source of your fear</li>
+                <li>You have disadvantage on ability checks while you can see the source of your fear</li>
+              </ul>
+            </td>
+
+          </tr>
+
+          <tr id="grappled">
+
+            <td colspan="2">Grappled</td>
+
+            <td colspan="4">
+              <ul>
+                <li>Your speed is reduced to 0 and cannot be increased</li>
+              </ul>
+            </td>
+
+          </tr>
+
+          <tr id="incapacitated">
+
+            <td colspan="2">Incapacitated</td>
+
+            <td colspan="4">
+              <ul>
+                <li>You cannot take actions, bonus actions, or reactions</li>
+              </ul>
+            </td>
+
+          </tr>
+
+          <tr id="invisible">
+
+            <td colspan="2">Invisible</td>
+
+            <td colspan="4">
+              <ul>
+                <li>You cannot be seen except by special means</li>
+                <li>You count as heavily obscured for the purposes of hiding</li>
+                <li>You make attack rolls with advantage</li>
+                <li>Attack rolls made against you have disadvantage</li>
+              </ul>
+            </td>
+
+          </tr>
+
+          <tr id="paralyzed">
+
+            <td colspan="2">Paralyzed</td>
+
+            <td colspan="4">
+              <ul>
+                <li>You're <a href="#incapacitated">incapacitated</a></li>
+                <li>You cannot move (cannot complete somatic component of spells)</li>
+                <li>You cannot speak (cannot complete verbal component of spells)</li>
+                <li>You automatically fail Strength and Dexterity saving throws</li>
+                <li>Attack rolls made against you have advantage</li>
+                <li>Attack rolls against you automatically result in critical hits if the attacker is within 5 feet of
+                  you</li>
+              </ul>
+            </td>
+
+          </tr>
+
+          <tr id="petrified">
+
+            <td colspan="2">Petrified</td>
+
+            <td colspan="4">
+              <ul>
+                <li>You physically turn to stone and your weight is multiplied by ten</li>
+                <li>You're <a href="#incapacitated">incapacitated</a></li>
+                <li>You cannot move (cannot complete somatic component of spells)</li>
+                <li>You cannot speak (cannot complete verbal component of spells)</li>
+                <li>You automatically fail Strength and Dexterity saving throws</li>
+                <li>Attack rolls made against you have advantage</li>
+                <li>You do not age while petrified</li>
+                <li>You have resistance to all damage</li>
+                <li>You are immune to all poisons and diseases</li>
+              </ul>
+            </td>
+
+          </tr>
+
+          <tr id="poisoned">
+
+            <td colspan="2">Poisoned</td>
+
+            <td colspan="4">
+              <ul>
+                <li>You have disadvantage on Attack rolls</li>
+                <li>You have disadvantage on Ability checks</li>
+              </ul>
+            </td>
+
+          </tr>
+
+          <tr id="prone">
+
+            <td colspan="2">Prone</td>
+
+            <td colspan="4">
+              <ul>
+                <li>Your movement requires 1 additional foot of movement speed for each foot you move (essentially
+                  halving your movement for the round)</li>
+                <li>You can spend half your movement to stand up and end the Prone condition</li>
+                <li>Creatures within 5 feet of you have advantage on their Attack rolls against you</li>
+                <li>Creatures more than 5 feet away from you have disadvantage on their Attack rolls against you</li>
+              </ul>
+            </td>
+
+          </tr>
+
+          <tr id="restrained">
+
+            <td colspan="2">Restrained</td>
+
+            <td colspan="4">
+              <ul>
+                <li>Your speed is reduced to 0 and cannot be increased</li>
+                <li>You have disadvantage on Attack rolls</li>
+                <li>Attack rolls made against you have advantage</li>
+                <li>You have disadvantage on Dexterity saving throws</li>
+              </ul>
+            </td>
+
+          </tr>
+
+          <tr id="stunned">
+
+            <td colspan="2">Stunned</td>
+
+            <td colspan="4">
+              <ul>
+                <li>You're <a href="#incapacitated">incapacitated</a></li>
+                <li>You cannot move (cannot complete somatic component of spells)</li>
+                <li>You cannot speak (cannot complete verbal component of spells)</li>
+                <li>You automatically fail Strength and Dexterity saving throws</li>
+                <li>Attack rolls made against you have advantage</li>
+              </ul>
+            </td>
+
+          </tr>
+
+          <tr id="surprised">
+
+            <td colspan="2">Surprised</td>
+
+            <td colspan="4">
+              <ul>
+                <li>You cannot take actions, bonus actions, or reactions during the 1st round of combat</li>
+              </ul>
+            </td>
+
+          </tr>
+
+          <tr id="unconscious">
+
+            <td colspan="2">Unconscious</td>
+
+            <td colspan="4">
+              <ul>
+                <li>You're <a href="#incapacitated">incapacitated</a></li>
+                <li>You cannot move (cannot complete somatic component of spells)</li>
+                <li>You cannot speak (cannot complete verbal component of spells)</li>
+                <li>You automatically fail Strength and Dexterity saving throws</li>
+                <li>Attack rolls made against you have advantage</li>
+                <li>Attack rolls made against you automatically result in critical hits if the attacker is within 5 feet
+                  of you</li>
+                <li>You are unaware of your surroundings</li>
+                <li>You fall <a href="#prone">prone</a></li>
+                <li>You drop any items you were holding</li>
+              </ul>
+            </td>
+
+          </tr>
+
+          <tr id="exhaustion">
+
+            <td colspan="2">Levels of Exhaustion</td>
+
+            <td colspan="4">
+              <ol>
+                <li>You have disadvantage on all Ability Checks</li>
+                <li>Your movement speed is halved</li>
+                <li>You have disadvantage on Attack Rolls and Saving Throws</li>
+                <li>Your Hit Point maximum is halved</li>
+                <li>Your movement speed is reduced to 0 and cannot be increased</li>
+                <li>You die</li>
+              </ol>
+            </td>
+
+          </tr>
+
+        </tbody>
+
+      </table>
+
+    </div>
+
+    <div class="container" id="new-player">
+
+      <div id="newPlayer" class="row playerInput">
+
+        <input id="initIn" class="two columns" type="number" placeholder="Initiative"></input>
+
+        <input id="nameIn" class="two columns" type="text" placeholder="Name"></input>
+
+        <input id="hpIn" class="two columns" type="number" placeholder="Hit Points"></input>
+
+        <input id="acIn" class="two columns" type="number" placeholder="Armor Class"></input>
+
+        <input id="notesIn" class="two columns" type="text" placeholder="Notes"></input>
+
+        <button class="add button-primary two columns" id="addPlayer" onclick="addPlayer()"><i
+            class="fas fa-plus"></i></button>
+
+        <span class="tooltiptext twelve columns">You have to input at least the Initiative and Name for this to
+          work</span>
+
+      </div>
+
+      <div class="row start-button">
+
+        <button id="start" class="start">
+
+          <i class="fas fa-play"></i>
+
+        </button>
+
+        <button id="next" class="button-primary hide">
+
+          <i class="fas fa-forward"></i>
+
+        </button>
+
+      </div>
 
     </div>
 
   </div>
-
-  <div class="container initTable">
-
-    <table class="u-full-width" id="initiativeTable">
-
-      <thead class="player">
-
-        <tr>
-
-          <th class="header unselected" id="block-one" colspan="3" onclick="showPlayers()">
-
-            <h4>Players and Initiative</h4>
-
-          </th>
-
-          <th class="header" id="block-two" colspan="3" onclick="showConditions()">
-
-            <h4>Conditions</h4>
-
-          </th>
-
-        </tr>
-
-      </thead>
-
-      <thead id="player-header">
-
-        <tr>
-
-          <th>Initiative:</th>
-          <th>Name:</th>
-          <th>Hit Points:</th>
-          <th>Armor Class:</th>
-          <th>Notes:</th>
-          <th>
-            <button class="save" id="save-button" onclick="savePlayers()">
-              <i class="fas fa-save"></i>
-            </button>
-            <label id="upload-label" for="file-upload" class="button">
-              <i class="fas fa-upload"></i>
-              <input id="file-upload" type="file" value="" placeholder="" enctype="text/plain;charset=utf-8" onchange="uploadPlayers()"></input>
-            </label>
-          </th>
-
-        </tr>
-
-      </thead>
-
-      <thead id="conditions-header" class="hide">
-
-        <tr>
-
-          <th colspan="2">Condition:</th>
-
-          <th colspan="2">Effects:</th>
-
-          <th colspan="2">
-
-            <input type="search" id="conditions-search" placeholder="Search Conditions" class="u-full-width" onkeyup="search()"></input>
-
-          </th>
-
-        </tr>
-
-      </thead>
-
-      <tbody id="playersList">
-
-        <tr>
-
-          <td contenteditable="true" oninput="sortTable()">00</td>
-
-          <td contenteditable="true">Player Playerson</td>
-
-          <td contenteditable="true">000</td>
-
-          <td contenteditable="true">00</td>
-
-          <td contenteditable="true">Add notes</td>
-
-          <td class="delete-button">
-
-            <button class="delete" onclick="deletePlayer(this);">
-
-              <i class="fas fa-trash"></i>
-
-            </button>
-
-          </td>
-
-        </tr>
-
-      </tbody>
-
-      <tbody id="conditions-table" class="hide">
-
-        <tr id="blinded">
-
-          <td colspan="2">Blinded</td>
-
-          <td colspan="4">
-            <ul>
-              <li>Automatic failure on sight-based checks</li>
-              <li>You have disadvantage on attack rolls</li>
-              <li>Attacks against you have advantage</li>
-            </ul>
-          </td>
-
-        </tr>
-
-        <tr id="charmed">
-
-          <td colspan="2">Charmed</td>
-
-          <td colspan="4">
-            <ul>
-              <li>You cannot target the creature that charmed you with attacks or harmful effects</li>
-              <li>The creature that charmed you has advantage on social interactions with you (Charisma based checks)</li>
-            </ul>
-          </td>
-
-        </tr>
-
-        <tr id="frightened">
-
-          <td colspan="2">Frightened</td>
-
-          <td colspan="4">
-            <ul>
-              <li>You cannot willingly move closer to the source of your fear</li>
-              <li>You have disadvantage on attack rolls while you can see the source of your fear</li>
-              <li>You have disadvantage on ability checks while you can see the source of your fear</li>
-            </ul>
-          </td>
-
-        </tr>
-
-        <tr id="grappled">
-
-          <td colspan="2">Grappled</td>
-
-          <td colspan="4">
-            <ul>
-              <li>Your speed is reduced to 0 and cannot be increased</li>
-            </ul>
-          </td>
-
-        </tr>
-
-        <tr id="incapacitated">
-
-          <td colspan="2">Incapacitated</td>
-
-          <td colspan="4">
-            <ul>
-              <li>You cannot take actions, bonus actions, or reactions</li>
-            </ul>
-          </td>
-
-        </tr>
-
-        <tr id="invisible">
-
-          <td colspan="2">Invisible</td>
-
-          <td colspan="4">
-            <ul>
-              <li>You cannot be seen except by special means</li>
-              <li>You count as heavily obscured for the purposes of hiding</li>
-              <li>You make attack rolls with advantage</li>
-              <li>Attack rolls made against you have disadvantage</li>
-            </ul>
-          </td>
-
-        </tr>
-
-        <tr id="paralyzed">
-
-          <td colspan="2">Paralyzed</td>
-
-          <td colspan="4">
-            <ul>
-              <li>You're <a href="#incapacitated">incapacitated</a></li>
-              <li>You cannot move (cannot complete somatic component of spells)</li>
-              <li>You cannot speak (cannot complete verbal component of spells)</li>
-              <li>You automatically fail Strength and Dexterity saving throws</li>
-              <li>Attack rolls made against you have advantage</li>
-              <li>Attack rolls against you automatically result in critical hits if the attacker is within 5 feet of you</li>
-            </ul>
-          </td>
-
-        </tr>
-
-        <tr id="petrified">
-
-          <td colspan="2">Petrified</td>
-
-          <td colspan="4">
-            <ul>
-              <li>You physically turn to stone and your weight is multiplied by ten</li>
-              <li>You're <a href="#incapacitated">incapacitated</a></li>
-              <li>You cannot move (cannot complete somatic component of spells)</li>
-              <li>You cannot speak (cannot complete verbal component of spells)</li>
-              <li>You automatically fail Strength and Dexterity saving throws</li>
-              <li>Attack rolls made against you have advantage</li>
-              <li>You do not age while petrified</li>
-              <li>You have resistance to all damage</li>
-              <li>You are immune to all poisons and diseases</li>
-            </ul>
-          </td>
-
-        </tr>
-
-        <tr id="poisoned">
-
-          <td colspan="2">Poisoned</td>
-
-          <td colspan="4">
-            <ul>
-              <li>You have disadvantage on Attack rolls</li>
-              <li>You have disadvantage on Ability checks</li>
-            </ul>
-          </td>
-
-        </tr>
-
-        <tr id="prone">
-
-          <td colspan="2">Prone</td>
-
-          <td colspan="4">
-            <ul>
-              <li>Your movement requires 1 additional foot of movement speed for each foot you move (essentially halving your movement for the round)</li>
-              <li>You can spend half your movement to stand up and end the Prone condition</li>
-              <li>Creatures within 5 feet of you have advantage on their Attack rolls against you</li>
-              <li>Creatures more than 5 feet away from you have disadvantage on their Attack rolls against you</li>
-            </ul>
-          </td>
-
-        </tr>
-
-        <tr id="restrained">
-
-          <td colspan="2">Restrained</td>
-
-          <td colspan="4">
-            <ul>
-              <li>Your speed is reduced to 0 and cannot be increased</li>
-              <li>You have disadvantage on Attack rolls</li>
-              <li>Attack rolls made against you have advantage</li>
-              <li>You have disadvantage on Dexterity saving throws</li>
-            </ul>
-          </td>
-
-        </tr>
-
-        <tr id="stunned">
-
-          <td colspan="2">Stunned</td>
-
-          <td colspan="4">
-            <ul>
-              <li>You're <a href="#incapacitated">incapacitated</a></li>
-              <li>You cannot move (cannot complete somatic component of spells)</li>
-              <li>You cannot speak (cannot complete verbal component of spells)</li>
-              <li>You automatically fail Strength and Dexterity saving throws</li>
-              <li>Attack rolls made against you have advantage</li>
-            </ul>
-          </td>
-
-        </tr>
-
-        <tr id="surprised">
-
-          <td colspan="2">Surprised</td>
-
-          <td colspan="4">
-            <ul>
-              <li>You cannot take actions, bonus actions, or reactions during the 1st round of combat</li>
-            </ul>
-          </td>
-
-        </tr>
-
-        <tr id="unconscious">
-
-          <td colspan="2">Unconscious</td>
-
-          <td colspan="4">
-            <ul>
-              <li>You're <a href="#incapacitated">incapacitated</a></li>
-              <li>You cannot move (cannot complete somatic component of spells)</li>
-              <li>You cannot speak (cannot complete verbal component of spells)</li>
-              <li>You automatically fail Strength and Dexterity saving throws</li>
-              <li>Attack rolls made against you have advantage</li>
-              <li>Attack rolls made against you automatically result in critical hits if the attacker is within 5 feet of you</li>
-              <li>You are unaware of your surroundings</li>
-              <li>You fall <a href="#prone">prone</a></li>
-              <li>You drop any items you were holding</li>
-            </ul>
-          </td>
-
-        </tr>
-
-        <tr id="exhaustion">
-
-          <td colspan="2">Levels of Exhaustion</td>
-
-          <td colspan="4">
-            <ol>
-              <li>You have disadvantage on all Ability Checks</li>
-              <li>Your movement speed is halved</li>
-              <li>You have disadvantage on Attack Rolls and Saving Throws</li>
-              <li>Your Hit Point maximum is halved</li>
-              <li>Your movement speed is reduced to 0 and cannot be increased</li>
-              <li>You die</li>
-            </ol>
-          </td>
-
-        </tr>
-
-      </tbody>
-
-    </table>
-
-  </div>
-
-  <div class="container" id="new-player">
-
-    <div id="newPlayer" class="row playerInput">
-
-      <input id="initIn" class="two columns" type="number" placeholder="Initiative"></input>
-
-      <input id="nameIn" class="two columns" type="text" placeholder="Name"></input>
-
-      <input id="hpIn" class="two columns" type="number" placeholder="Hit Points"></input>
-
-      <input id="acIn" class="two columns" type="number" placeholder="Armor Class"></input>
-
-      <input id="notesIn" class="two columns" type="text" placeholder="Notes"></input>
-
-      <button class="add button-primary two columns" id="addPlayer" onclick="addPlayer()"><i class="fas fa-plus"></i></button>
-
-      <span class="tooltiptext twelve columns">You have to input at least the Initiative and Name for this to work</span>
-
-    </div>
-
-    <div class="row start-button">
-
-      <button id="start" class="start">
-
-        <i class="fas fa-play"></i>
-
-      </button>
-
-      <button id="next" class="button-primary hide">
-
-        <i class="fas fa-forward"></i>
-
-      </button>
-
-    </div>
-
-  </div>
-
-</div>
-<!-- partial -->
+  <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js'></script><script  src="./script.js"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js'></script>
+  <script src="./script.js"></script>
 
 </body>
+
 </html>
