@@ -1,0 +1,205 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;0,800;1,300;1,400;1,600;1,700;1,800&family=Oswald:wght@200;300;400;500;600;700&display=swap");
+
+* {
+  transition: 0.25s ease-in-out;
+  list-style-position: outside;
+}
+
+body {
+  font-family: "Open Sans", sans-serif;
+  background: url("https://media.istockphoto.com/vectors/seamless-handdrawn-crosshatched-icosahedron-print-vector-colorful-on-vector-id1164308294?b=1&k=6&m=1164308294&s=170667a&w=0&h=Ta_-eJSXNX13OLzxCbK4Q2AjKUjW4DVWZA1gQvVUbaU=");
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Oswald", serif;
+}
+
+table {
+  table-layout: fixed;
+  overflow: scroll;
+}
+
+thead {
+  position: relative;
+}
+
+tbody {
+  overflow: scroll;
+  height: 100%;
+}
+
+th,
+td {
+  text-align: center;
+}
+
+.wrapper {
+  padding: 25px 0px;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.9);
+  height: 90%;
+  width: 60%;
+  position: fixed;
+  margin: auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  overflow: auto;
+}
+
+.title {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-end;
+}
+
+.header {
+  cursor: pointer;
+  border-top: 1px solid #ddd;
+}
+
+#block-one.unselected {
+  border-right: 2px solid #ddd;
+  box-shadow: inset -5px 0 10px #ccc;
+  cursor: auto;
+}
+
+#block-two.unselected {
+  border-left: 2px solid #ddd;
+  box-shadow: inset 5px 0 10px #ccc;
+  cursor: auto;
+}
+
+.hide {
+  display: none !important;
+  visibility: hidden !important;
+}
+
+.save {
+  color: green;
+  border-color: green;
+}
+
+.save:hover {
+  background-color: green;
+  border-color: white;
+  color: white;
+}
+
+.delete {
+  color: red;
+  border-color: red;
+}
+
+.delete:hover {
+  background-color: red;
+  border-color: white;
+  color: white;
+}
+
+.playerInput .tooltiptext {
+  visibility: hidden;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  top: 125%;
+  left: 0%;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.playerInput .tooltiptext::after {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent #555 transparent;
+  transition: opacity 0.3s;
+}
+
+.start-button {
+  margin-top: 25px;
+  text-align: center;
+}
+
+#start {
+  width: 25%;
+  color: white;
+}
+
+.start {
+  color: white;
+  background-color: green;
+  border: 1px solid white;
+}
+
+.start:hover {
+  color: green !important;
+  border-color: green;
+  background-color: white;
+}
+
+.stop {
+  color: white;
+  background-color: red;
+  border: 1px solid white;
+}
+
+.stop:hover {
+  color: red !important;
+  border-color: red;
+  background-color: white;
+}
+
+.highlight {
+  background-color: lightyellow;
+}
+
+#next {
+  width: 25%;
+}
+
+.button-primary:hover {
+  color: #33c3f0 !important;
+  background-color: white !important;
+  border-color: #33c3f0 !important;
+}
+
+#conditions-search {
+  background-image: url("http://assets.stickpng.com/thumbs/585e4ae1cb11b227491c3393.png");
+  background-size: 25px;
+  background-repeat: no-repeat;
+  background-position: 5px 50%;
+  text-indent: 30px;
+}
+
+#conditions-search:hover {
+  background-size: 15px;
+}
+
+#upload-label {
+  color: #33c3f0;
+  border-color: #33c3f0;
+}
+
+#upload-label:hover {
+  background-color: #33c3f0;
+  color: white;
+  border-color: white;
+}
+
+#file-upload {
+  display: none;
+}
