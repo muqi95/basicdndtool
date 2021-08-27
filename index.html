@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <title>Basic D&D Tool</title>
   <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css'>
-  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css'>
+  <script src="https://kit.fontawesome.com/2302c6499f.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="./style.css">
   <link rel="shortcut icon" type="image/jpg" href="https://muqtadaa.github.io/images/minimal_logo_no_text.png" />
 
@@ -360,6 +360,8 @@
 
     <div class="container" id="new-player">
 
+      <a onclick="hideInput(this)">Hide <i class="fas fa-chevron-down"></i></a>
+
       <div id="newPlayer" class="row playerInput">
 
         <input id="initIn" class="two columns" type="number" placeholder="Initiative"></input>
@@ -396,9 +398,45 @@
 
       </div>
 
+      <hr>
+
     </div>
 
   </div>
+
+  <div class="floating-dice" id="draggable">
+
+    <h2><i class="fas fa-dice-d20"></i></h2>
+
+    <div class="hide-dice" id="dice">
+
+      <h2 id="d20" onclick="rollDice(this)"><i class="fal fa-dice-d20"></i></h2>
+
+      <h2 id="d12" onclick="rollDice(this)"><i class="fal fa-dice-d12"></i></h2>
+
+      <h2 id="d10" onclick="rollDice(this)"><i class="fal fa-dice-d10"></i></h2>
+
+      <h2 id="d8" onclick="rollDice(this)"><i class="fal fa-dice-d8"></i></h2>
+
+      <h2 id="d6" onclick="rollDice(this)"><i class="fal fa-dice-d6"></i></h2>
+
+      <h2 id="d4" onclick="rollDice(this)"><i class="fal fa-dice-d4"></i></h2>
+
+      <h2 id="dOutput" onclick="rollDice(this)">
+
+        <ul>
+
+
+
+        </ul>
+
+      </h2>
+
+    </div>
+
+  </div>
+
+
   <!-- partial -->
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js'></script>
   <script src='https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js'></script>

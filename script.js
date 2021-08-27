@@ -1,5 +1,4 @@
 var position = "";
-
 function sortTable() {
   var table, rows, switching, i, x, y, shouldSwitch;
   table = document.getElementById("playersList");
@@ -218,3 +217,38 @@ $("#next").on("click", () => {
     console.log("Error running initiative");
   }
 });
+
+$("#draggable").draggable({
+  snap: "true",
+  distance: 50,
+  containment: [0, 0, window.innerWidth / 3, 5 * window.innerHeight / 6]
+});
+
+$("#draggable > h2").on("click", function () {
+  document.querySelector("#dice").classList.toggle("hide-dice");
+});
+
+function rollDice(dice) {
+  var diceType = dice.id;
+  var diceNum, result, i = 0;
+  var results = [];
+  if (diceType != "dOutput") {
+    diceNum = parseInt(diceType.substring(1));
+    result = Math.floor(Math.random() * diceNum) + 1;
+    results.push(result);
+    for (i; i < results.length; i++) {
+      document.querySelector("#dOutput > ul").innerHTML += "<li>" + results[i] + "</li>";
+    }
+  } else if (diceType == "dOutput") {
+    document.querySelector("#dOutput > ul").innerHTML = "";
+  }
+}
+
+function hideInput(element) {
+  $("#newPlayer").slideToggle()
+  if (element.innerText.indexOf("Hide") != -1) {
+    element.innerHTML = 'Show <i class="fas fa-chevron-right" aria-hidden="true"></i>';
+  } else if (element.innerText.indexOf("Show") != -1) {
+    element.innerHTML = 'Hide <i class="fas fa-chevron-down" aria-hidden="true"></i>';
+  }
+}

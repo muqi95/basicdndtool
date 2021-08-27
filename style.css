@@ -43,7 +43,7 @@ td {
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.9);
   height: 90%;
-  width: 60%;
+  width: 80%;
   position: fixed;
   margin: auto;
   top: 50%;
@@ -170,6 +170,103 @@ td {
   background-color: lightgreen;
 }
 
+.dice {
+  text-align: center;
+}
+
+.floating-dice {
+  color: red;
+  top: 80%;
+  left: 7.5%;
+  position: absolute;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  transition: 0.1s ease-out;
+}
+
+.floating-dice > h2 {
+  width: 70px;
+  height: 62.5px;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 75px;
+  text-align: center;
+  padding-top: 7.5px;
+  cursor: pointer;
+  border: 2.5px solid red;
+  z-index: 99;
+}
+
+.floating-dice > h2:hover {
+  box-shadow: inset 0px 0px 10px black;
+}
+
+.floating-dice > h2:active {
+  cursor: grabbing;
+}
+
+.hide-dice#dice {
+  display: inherit;
+  width: 0px;
+  visibility: collapse;
+  opacity: 0;
+  transition: 0.25s ease-in-out;
+}
+
+#new-player a {
+  cursor: pointer;
+}
+
+#newPlayer {
+  transition: 0.1s none;
+}
+
+#dOutput {
+  
+  overflow: scroll;
+}
+
+#dice {
+  text-align: center;
+  width: 500px;
+  height: 50px;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  opacity: 1;
+  text-shadow: 0px 0px 5px #666;
+  transition: 0.25s ease-in;
+  z-index: 98;
+}
+
+#dice > h2:hover {
+  font-size: 4em;
+  cursor: pointer;
+}
+
+#dice > h2:last-of-type:hover {
+  font-size: 4.15rem;
+  cursor: pointer;
+}
+
+#dice ul {
+  text-decoration: none;
+  list-style: none;
+  color: black;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 200px;
+  padding-bottom:100px;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+
+#dice ul li:last-of-type {
+  text-decoration: red underline;
+}
+
 #next {
   width: 25%;
 }
@@ -186,7 +283,7 @@ td {
 
 }
 
-#conditions-table td {
+#conditions-header th,#conditions-table td {
   text-align: left;
 }
 
