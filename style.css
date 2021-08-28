@@ -8,6 +8,12 @@
 body {
   font-family: "Open Sans", sans-serif;
   background: url("https://media.istockphoto.com/vectors/seamless-handdrawn-crosshatched-icosahedron-print-vector-colorful-on-vector-id1164308294?b=1&k=6&m=1164308294&s=170667a&w=0&h=Ta_-eJSXNX13OLzxCbK4Q2AjKUjW4DVWZA1gQvVUbaU=");
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 h1,
@@ -222,11 +228,28 @@ td {
 }
 
 #dOutput {
-  
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll;
   overflow: scroll;
 }
 
-#dice {
+#dOutput::-webkit-scrollbar {
+  display: none;
+}
+
+#rolls-list {
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+  overflow-y: scroll;
+  overflow: scroll;
+}
+
+#rolls-list::-webkit-scrollbar {
+  display: none;
+}
+
+#dice,#dice-inline {
   text-align: center;
   width: 500px;
   height: 50px;
@@ -239,12 +262,12 @@ td {
   z-index: 98;
 }
 
-#dice > h2:hover {
+#dice > h2:hover,#dice-inline > h2:hover {
   font-size: 4em;
   cursor: pointer;
 }
 
-#dice > h2:last-of-type:hover {
+#dice > h2:last-of-type:hover,#dice-inline > h2:last-of-type:hover {
   font-size: 4.15rem;
   cursor: pointer;
 }
@@ -253,7 +276,6 @@ td {
   text-decoration: none;
   list-style: none;
   color: black;
-  overflow: hidden;
   display: flex;
   flex-direction: column;
   height: 200px;
@@ -261,7 +283,6 @@ td {
   align-items: flex-end;
   justify-content: flex-end;
 }
-
 
 #dice ul li:last-of-type {
   text-decoration: red underline;
@@ -278,9 +299,13 @@ td {
 }
 
 #playersList tr td:nth-of-type(5) {
-  overflow: scroll;
-  word-wrap: break-word;
+  overflow-x: scroll;
+  -ms-overflow-style: none; /* for Internet Explorer, Edge */
+  scrollbar-width: none; /* for Firefox */
+}
 
+#playersList tr td:nth-of-type(5)::-webkit-scrollbar {
+  display: none;
 }
 
 #conditions-header th,#conditions-table td {
